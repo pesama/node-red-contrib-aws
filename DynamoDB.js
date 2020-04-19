@@ -40,7 +40,8 @@ module.exports = function(RED) {
 		}
 
 		node.on("input", function(msg) {
-			node.warn(`Selected endpoint: ${node.endpoint}`);
+			
+			node.warn(`Selected endpoint: ${JSON.stringify(n, null, 2)}`);
 			var awsService = new AWS.DynamoDB( { 
 				region: node.region, 
 				endpoint: node.endpoint,
