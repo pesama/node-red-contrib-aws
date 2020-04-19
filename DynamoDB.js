@@ -209,7 +209,7 @@ module.exports = function(RED) {
 			copyArg(msg,"ExpressionAttributeValues",params,undefined,true); 
 			
 
-			svc.deleteItem(params,cb);
+			svc.delete(params,cb);
 		}
 
 		
@@ -342,7 +342,7 @@ module.exports = function(RED) {
 			copyArg(msg,"ExpressionAttributeNames",params,undefined,true); 
 			
 
-			svc.getItem(params,cb);
+			svc.get(params,cb);
 		}
 
 		
@@ -423,7 +423,7 @@ module.exports = function(RED) {
 			copyArg(msg,"ExpressionAttributeValues",params,undefined,true); 
 			
 
-			svc.putItem(params,cb);
+			svc.put(params,cb);
 		}
 
 		
@@ -614,7 +614,7 @@ module.exports = function(RED) {
 			copyArg(msg,"ExpressionAttributeValues",params,undefined,true); 
 			
 
-			svc.updateItem(params,cb);
+			svc.update(params,cb);
 		}
 
 		
