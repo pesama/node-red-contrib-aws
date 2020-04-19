@@ -29,8 +29,6 @@ module.exports = function(RED) {
 		this.secretKey = this.awsConfig.secretKey;
 		this.endpoint = n.endpoint;
 
-		this.log(`Selected Endpoint: ${this.endpoint}`);
-
 		var node = this;
 		var AWS = require("aws-sdk");
 		if (!AWS) {
@@ -51,6 +49,8 @@ module.exports = function(RED) {
 			accessKeyId: this.accessKey,
 			secretAccessKey: this.secretKey,
 		});
+
+		node.warn(`Selected endpoint: ${node.endpoint}`);
 
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
