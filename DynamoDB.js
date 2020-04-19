@@ -27,7 +27,7 @@ module.exports = function(RED) {
 		this.region = this.awsConfig.region;
 		this.accessKey = this.awsConfig.accessKey;
 		this.secretKey = this.awsConfig.secretKey;
-		this.endpoint = n.endpoint;
+		this.endpoint = this.awsConfig.endpoint;
 
 		var node = this;
 		var AWS = require("aws-sdk");
@@ -41,8 +41,8 @@ module.exports = function(RED) {
 
 		node.on("input", function(msg) {
 			
-			node.warn(`NODE: ${JSON.stringify(node, null, 2)}`);
-			node.warn(`N: ${JSON.stringify(n, null, 2)}`);
+			// node.warn(`NODE: ${JSON.stringify(node, null, 2)}`);
+			// node.warn(`N: ${JSON.stringify(n, null, 2)}`);
 			var awsService = new AWS.DynamoDB( { 
 				region: node.region, 
 				endpoint: node.endpoint,
