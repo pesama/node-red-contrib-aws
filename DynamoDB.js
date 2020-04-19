@@ -31,27 +31,23 @@ module.exports = function(RED) {
 
 		var node = this;
 		var AWS = require("aws-sdk");
-		if (!AWS) {
-			node.warn("Missing AWS credentials");
-			return;
+
+		if (this.awsConfig.proxyRequired){
+			var proxy = require('proxy-agent');
+			AWS.config.update({
+					httpOptions: { agent: new proxy(this.awsConfig.proxy) }
+			});
 		}
 
-        if (this.awsConfig.proxyRequired){
-            var proxy = require('proxy-agent');
-            AWS.config.update({
-                httpOptions: { agent: new proxy(this.awsConfig.proxy) }
-            });
-        }
-
-		node.warn(`Selected endpoint: ${node.endpoint}`);
-		var awsService = new AWS.DynamoDB( { 
-			region: node.region, 
-			endpoint: node.endpoint,
-			accessKeyId: this.accessKey,
-			secretAccessKey: this.secretKey,
-		});
-
 		node.on("input", function(msg) {
+			node.warn(`Selected endpoint: ${node.endpoint}`);
+			var awsService = new AWS.DynamoDB( { 
+				region: node.region, 
+				endpoint: node.endpoint,
+				accessKeyId: this.accessKey,
+				secretAccessKey: this.secretKey,
+			});
+
 			node.sendMsg = function (err, data) {
 				if (err) {
 				    node.status({fill:"red",shape:"ring",text:"error"});
