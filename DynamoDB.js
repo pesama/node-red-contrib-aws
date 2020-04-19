@@ -43,14 +43,13 @@ module.exports = function(RED) {
             });
         }
 
+		node.warn(`Selected endpoint: ${node.endpoint}`);
 		var awsService = new AWS.DynamoDB( { 
 			region: node.region, 
 			endpoint: node.endpoint,
 			accessKeyId: this.accessKey,
 			secretAccessKey: this.secretKey,
 		});
-
-		node.warn(`Selected endpoint: ${node.endpoint}`);
 
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
