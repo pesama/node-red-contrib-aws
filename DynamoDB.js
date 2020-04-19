@@ -29,7 +29,7 @@ module.exports = function(RED) {
 		this.secretKey = this.awsConfig.secretKey;
 		this.endpoint = n.endpoint;
 
-		console.log(`Selected Endpoint: ${this.endpoint}`);
+		node.log(`Selected Endpoint: ${this.endpoint}`);
 
 		var node = this;
 		var AWS = require("aws-sdk");
