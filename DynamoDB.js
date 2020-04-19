@@ -41,8 +41,6 @@ module.exports = function(RED) {
 
 		node.on("input", function(msg) {
 			
-			// node.warn(`NODE: ${JSON.stringify(node, null, 2)}`);
-			// node.warn(`N: ${JSON.stringify(n, null, 2)}`);
 			var awsService = new AWS.DynamoDB( { 
 				region: node.region, 
 				endpoint: node.endpoint,
@@ -209,7 +207,7 @@ module.exports = function(RED) {
 			copyArg(msg,"ExpressionAttributeValues",params,undefined,true); 
 			
 
-			svc.delete(params,cb);
+			svc.deleteItem(params,cb);
 		}
 
 		
@@ -342,7 +340,7 @@ module.exports = function(RED) {
 			copyArg(msg,"ExpressionAttributeNames",params,undefined,true); 
 			
 
-			svc.get(params,cb);
+			svc.getItem(params,cb);
 		}
 
 		
@@ -423,7 +421,7 @@ module.exports = function(RED) {
 			copyArg(msg,"ExpressionAttributeValues",params,undefined,true); 
 			
 
-			svc.put(params,cb);
+			svc.putItem(params,cb);
 		}
 
 		
@@ -614,7 +612,7 @@ module.exports = function(RED) {
 			copyArg(msg,"ExpressionAttributeValues",params,undefined,true); 
 			
 
-			svc.update(params,cb);
+			svc.updateItem(params,cb);
 		}
 
 		
