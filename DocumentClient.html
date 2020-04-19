@@ -1,0 +1,356 @@
+
+<!--
+  Copyright 2017 Daniel Thomas.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="AWS DocumentClient">
+  <style scoped>
+      .hiddenAttrs {display:none;}
+      .visibleAttrs {display:block;}
+  </style>
+<div class="form-row">
+  <label for="node-input-aws"><i class="fa fa-user"></i> AWS</label>
+  <input type="text" id="node-input-aws">
+</div>
+<div class="form-row">
+  <label for="node-input-operation"><i class="fa fa-wrench"></i> Operation</label>
+  <select type="text" id="node-input-operation">
+  
+    <option value="BatchGetItem">BatchGetItem</option>
+  
+    <option value="BatchWriteItem">BatchWriteItem</option>
+  
+    <option value="CreateBackup">CreateBackup</option>
+  
+    <option value="CreateGlobalTable">CreateGlobalTable</option>
+  
+    <option value="CreateTable">CreateTable</option>
+  
+    <option value="DeleteBackup">DeleteBackup</option>
+  
+    <option value="DeleteItem">DeleteItem</option>
+  
+    <option value="DeleteTable">DeleteTable</option>
+  
+    <option value="DescribeBackup">DescribeBackup</option>
+  
+    <option value="DescribeContinuousBackups">DescribeContinuousBackups</option>
+  
+    <option value="DescribeEndpoints">DescribeEndpoints</option>
+  
+    <option value="DescribeGlobalTable">DescribeGlobalTable</option>
+  
+    <option value="DescribeGlobalTableSettings">DescribeGlobalTableSettings</option>
+  
+    <option value="DescribeLimits">DescribeLimits</option>
+  
+    <option value="DescribeTable">DescribeTable</option>
+  
+    <option value="DescribeTimeToLive">DescribeTimeToLive</option>
+  
+    <option value="GetItem">GetItem</option>
+  
+    <option value="ListBackups">ListBackups</option>
+  
+    <option value="ListGlobalTables">ListGlobalTables</option>
+  
+    <option value="ListTables">ListTables</option>
+  
+    <option value="ListTagsOfResource">ListTagsOfResource</option>
+  
+    <option value="PutItem">PutItem</option>
+  
+    <option value="Query">Query</option>
+  
+    <option value="RestoreTableFromBackup">RestoreTableFromBackup</option>
+  
+    <option value="RestoreTableToPointInTime">RestoreTableToPointInTime</option>
+  
+    <option value="Scan">Scan</option>
+  
+    <option value="TagResource">TagResource</option>
+  
+    <option value="UntagResource">UntagResource</option>
+  
+    <option value="UpdateContinuousBackups">UpdateContinuousBackups</option>
+  
+    <option value="UpdateGlobalTable">UpdateGlobalTable</option>
+  
+    <option value="UpdateGlobalTableSettings">UpdateGlobalTableSettings</option>
+  
+    <option value="UpdateItem">UpdateItem</option>
+  
+    <option value="UpdateTable">UpdateTable</option>
+  
+    <option value="UpdateTimeToLive">UpdateTimeToLive</option>
+  ;
+  </select>
+</div>
+<div class="form-row">
+  <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+  <input type="text" id="node-input-name" placeholder="Name"></input>
+</div>
+<hr/>	
+<div id="AttrHolder">
+      
+<div class="form-row" id='RequestItemsAttr' class='hiddenAttrs'>
+  <label for="node-input-RequestItems"><i class="fa fa-tag"></i>RequestItems</label>
+  <input type="text" id="node-input-RequestItems" placeholder="RequestItems"></input>
+</div> 
+<div class="form-row" id='TableNameAttr' class='hiddenAttrs'>
+  <label for="node-input-TableName"><i class="fa fa-tag"></i>TableName</label>
+  <input type="text" id="node-input-TableName" placeholder="TableName"></input>
+</div> 
+<div class="form-row" id='BackupNameAttr' class='hiddenAttrs'>
+  <label for="node-input-BackupName"><i class="fa fa-tag"></i>BackupName</label>
+  <input type="text" id="node-input-BackupName" placeholder="BackupName"></input>
+</div> 
+<div class="form-row" id='GlobalTableNameAttr' class='hiddenAttrs'>
+  <label for="node-input-GlobalTableName"><i class="fa fa-tag"></i>GlobalTableName</label>
+  <input type="text" id="node-input-GlobalTableName" placeholder="GlobalTableName"></input>
+</div> 
+<div class="form-row" id='ReplicationGroupAttr' class='hiddenAttrs'>
+  <label for="node-input-ReplicationGroup"><i class="fa fa-tag"></i>ReplicationGroup</label>
+  <input type="text" id="node-input-ReplicationGroup" placeholder="ReplicationGroup"></input>
+</div> 
+<div class="form-row" id='AttributeDefinitionsAttr' class='hiddenAttrs'>
+  <label for="node-input-AttributeDefinitions"><i class="fa fa-tag"></i>AttributeDefinitions</label>
+  <input type="text" id="node-input-AttributeDefinitions" placeholder="AttributeDefinitions"></input>
+</div> 
+<div class="form-row" id='KeySchemaAttr' class='hiddenAttrs'>
+  <label for="node-input-KeySchema"><i class="fa fa-tag"></i>KeySchema</label>
+  <input type="text" id="node-input-KeySchema" placeholder="KeySchema"></input>
+</div> 
+<div class="form-row" id='ProvisionedThroughputAttr' class='hiddenAttrs'>
+  <label for="node-input-ProvisionedThroughput"><i class="fa fa-tag"></i>ProvisionedThroughput</label>
+  <input type="text" id="node-input-ProvisionedThroughput" placeholder="ProvisionedThroughput"></input>
+</div> 
+<div class="form-row" id='BackupArnAttr' class='hiddenAttrs'>
+  <label for="node-input-BackupArn"><i class="fa fa-tag"></i>BackupArn</label>
+  <input type="text" id="node-input-BackupArn" placeholder="BackupArn"></input>
+</div> 
+<div class="form-row" id='KeyAttr' class='hiddenAttrs'>
+  <label for="node-input-Key"><i class="fa fa-tag"></i>Key</label>
+  <input type="text" id="node-input-Key" placeholder="Key"></input>
+</div> 
+<div class="form-row" id='ResourceArnAttr' class='hiddenAttrs'>
+  <label for="node-input-ResourceArn"><i class="fa fa-tag"></i>ResourceArn</label>
+  <input type="text" id="node-input-ResourceArn" placeholder="ResourceArn"></input>
+</div> 
+<div class="form-row" id='ItemAttr' class='hiddenAttrs'>
+  <label for="node-input-Item"><i class="fa fa-tag"></i>Item</label>
+  <input type="text" id="node-input-Item" placeholder="Item"></input>
+</div> 
+<div class="form-row" id='TargetTableNameAttr' class='hiddenAttrs'>
+  <label for="node-input-TargetTableName"><i class="fa fa-tag"></i>TargetTableName</label>
+  <input type="text" id="node-input-TargetTableName" placeholder="TargetTableName"></input>
+</div> 
+<div class="form-row" id='SourceTableNameAttr' class='hiddenAttrs'>
+  <label for="node-input-SourceTableName"><i class="fa fa-tag"></i>SourceTableName</label>
+  <input type="text" id="node-input-SourceTableName" placeholder="SourceTableName"></input>
+</div> 
+<div class="form-row" id='TagsAttr' class='hiddenAttrs'>
+  <label for="node-input-Tags"><i class="fa fa-tag"></i>Tags</label>
+  <input type="text" id="node-input-Tags" placeholder="Tags"></input>
+</div> 
+<div class="form-row" id='TagKeysAttr' class='hiddenAttrs'>
+  <label for="node-input-TagKeys"><i class="fa fa-tag"></i>TagKeys</label>
+  <input type="text" id="node-input-TagKeys" placeholder="TagKeys"></input>
+</div> 
+<div class="form-row" id='PointInTimeRecoverySpecificationAttr' class='hiddenAttrs'>
+  <label for="node-input-PointInTimeRecoverySpecification"><i class="fa fa-tag"></i>PointInTimeRecoverySpecification</label>
+  <input type="text" id="node-input-PointInTimeRecoverySpecification" placeholder="PointInTimeRecoverySpecification"></input>
+</div> 
+<div class="form-row" id='ReplicaUpdatesAttr' class='hiddenAttrs'>
+  <label for="node-input-ReplicaUpdates"><i class="fa fa-tag"></i>ReplicaUpdates</label>
+  <input type="text" id="node-input-ReplicaUpdates" placeholder="ReplicaUpdates"></input>
+</div> 
+<div class="form-row" id='TimeToLiveSpecificationAttr' class='hiddenAttrs'>
+  <label for="node-input-TimeToLiveSpecification"><i class="fa fa-tag"></i>TimeToLiveSpecification</label>
+  <input type="text" id="node-input-TimeToLiveSpecification" placeholder="TimeToLiveSpecification"></input>
+</div> 
+</div>
+
+<script>
+  var nodeOps={
+    
+      BatchGetItem:[
+        '#RequestItemsAttr'
+        ],
+      BatchWriteItem:[
+        '#RequestItemsAttr'
+        ],
+      CreateBackup:[
+        '#TableNameAttr','#BackupNameAttr'
+        ],
+      CreateGlobalTable:[
+        '#GlobalTableNameAttr','#ReplicationGroupAttr'
+        ],
+      CreateTable:[
+        '#AttributeDefinitionsAttr','#TableNameAttr','#KeySchemaAttr','#ProvisionedThroughputAttr'
+        ],
+      DeleteBackup:[
+        '#BackupArnAttr'
+        ],
+      DeleteItem:[
+        '#TableNameAttr','#KeyAttr'
+        ],
+      DeleteTable:[
+        '#TableNameAttr'
+        ],
+      DescribeBackup:[
+        '#BackupArnAttr'
+        ],
+      DescribeContinuousBackups:[
+        '#TableNameAttr'
+        ],
+      DescribeEndpoints:[
+        
+        ],
+      DescribeGlobalTable:[
+        '#GlobalTableNameAttr'
+        ],
+      DescribeGlobalTableSettings:[
+        '#GlobalTableNameAttr'
+        ],
+      DescribeLimits:[
+        
+        ],
+      DescribeTable:[
+        '#TableNameAttr'
+        ],
+      DescribeTimeToLive:[
+        '#TableNameAttr'
+        ],
+      GetItem:[
+        '#TableNameAttr','#KeyAttr'
+        ],
+      ListBackups:[
+        
+        ],
+      ListGlobalTables:[
+        
+        ],
+      ListTables:[
+        
+        ],
+      ListTagsOfResource:[
+        '#ResourceArnAttr'
+        ],
+      PutItem:[
+        '#TableNameAttr','#ItemAttr'
+        ],
+      Query:[
+        '#TableNameAttr'
+        ],
+      RestoreTableFromBackup:[
+        '#TargetTableNameAttr','#BackupArnAttr'
+        ],
+      RestoreTableToPointInTime:[
+        '#SourceTableNameAttr','#TargetTableNameAttr'
+        ],
+      Scan:[
+        '#TableNameAttr'
+        ],
+      TagResource:[
+        '#ResourceArnAttr','#TagsAttr'
+        ],
+      UntagResource:[
+        '#ResourceArnAttr','#TagKeysAttr'
+        ],
+      UpdateContinuousBackups:[
+        '#TableNameAttr','#PointInTimeRecoverySpecificationAttr'
+        ],
+      UpdateGlobalTable:[
+        '#GlobalTableNameAttr','#ReplicaUpdatesAttr'
+        ],
+      UpdateGlobalTableSettings:[
+        '#GlobalTableNameAttr'
+        ],
+      UpdateItem:[
+        '#TableNameAttr','#KeyAttr'
+        ],
+      UpdateTable:[
+        '#TableNameAttr'
+        ],
+      UpdateTimeToLive:[
+        '#TableNameAttr','#TimeToLiveSpecificationAttr'
+        ]
+  };
+  $('#node-input-operation').on('change',function(){
+    $('#AttrHolder').children().addClass('hiddenAttrs').removeClass('visibleAttrs');
+      if (nodeOps[this.value])
+        $(nodeOps[this.value].join()).addClass('visibleAttrs').removeClass('hiddenAttrs');
+   });
+</script>
+
+</script>
+
+<script type="text/x-red" data-help-name="amazon DocumentClient">
+<p>
+AWS Amazon DocumentClient
+</p>
+<p>
+<b>Descriptions to be added</b<
+</p>
+<p>
+NOTE: Parameters must be specified in the message, using the case specified in the AWS API documentation (normally UpperCaseLeading)..
+</p>
+
+</script>
+
+<script type="text/javascript">
+RED.nodes.registerType('AWS DocumentClient',{
+  category: 'AWS',
+  color:"#C0DEED",
+  defaults: {
+    aws: {type:"amazon config",required:true},
+    operation: { value: 'BatchGetItem' },
+    
+      RequestItems: { value: ""} ,
+      TableName: { value: ""} ,
+      BackupName: { value: ""} ,
+      GlobalTableName: { value: ""} ,
+      ReplicationGroup: { value: ""} ,
+      AttributeDefinitions: { value: ""} ,
+      KeySchema: { value: ""} ,
+      ProvisionedThroughput: { value: ""} ,
+      BackupArn: { value: ""} ,
+      Key: { value: ""} ,
+      ResourceArn: { value: ""} ,
+      Item: { value: ""} ,
+      TargetTableName: { value: ""} ,
+      SourceTableName: { value: ""} ,
+      Tags: { value: ""} ,
+      TagKeys: { value: ""} ,
+      PointInTimeRecoverySpecification: { value: ""} ,
+      ReplicaUpdates: { value: ""} ,
+      TimeToLiveSpecification: { value: ""} ,
+    name: { value: "" }
+  },
+  inputs:1,
+      outputs: 2,
+      outputLabels: ["data","err"],
+  icon: "aws.png",
+  align: "right",
+  label: function() {
+    return this.name || "DocClient " + this.operation;
+  },
+  oneditprepare: function () {
+
+  }
+});
+</script>
+
