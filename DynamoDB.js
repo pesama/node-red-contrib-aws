@@ -27,7 +27,7 @@ module.exports = function(RED) {
 		this.region = this.awsConfig.region;
 		this.accessKey = this.awsConfig.accessKey;
 		this.secretKey = this.awsConfig.secretKey;
-		this.endpoint = this.awsConfig.endpoint;
+		this.endpoint = n.endpoint;
 
 		console.log(`Selected Endpoint: ${this.endpoint}`);
 
