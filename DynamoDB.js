@@ -27,6 +27,7 @@ module.exports = function(RED) {
 		this.region = this.awsConfig.region;
 		this.accessKey = this.awsConfig.accessKey;
 		this.secretKey = this.awsConfig.secretKey;
+		this.endpoint = this.awsConfig.endpoint;
 
 		var node = this;
 		var AWS = require("aws-sdk");
@@ -47,7 +48,7 @@ module.exports = function(RED) {
             });
         }
 
-		var awsService = new AWS.DynamoDB( { 'region': node.region } );
+		var awsService = new AWS.DynamoDB( { 'region': node.region, endpoint: node.endpoint } );
 
 		node.on("input", function(msg) {
 			node.sendMsg = function (err, data) {
